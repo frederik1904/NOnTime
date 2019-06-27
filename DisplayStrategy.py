@@ -6,20 +6,19 @@ import digitalio
 
 
 class DisplayInterface:
-    ___metaclass___ = ABCMeta
-
-    @classmethod
-    def version(cls):
-        return "1.0"
+    """ A Strategy class for returning a reply to the user """
+    __metaclass__ = ABCMeta
 
     @classmethod
     def show_msg(cls, msg):
+        """ A method to show a message to the user through some I/O device """
         raise NotImplementedError
 
 
 class ConsoleDisplay(DisplayInterface):
     @classmethod
     def show_msg(cls, msg):
+        """ Prints the msg string to the user """
         print(msg)
 
 
@@ -39,9 +38,12 @@ class LCDDisplay(DisplayInterface):
 
     @classmethod
     def show_msg(cls, msg):
+        """ Clears the LCD screen and writes the msg string to it """
+        if not isinstance(msg, str):
+            raise Exception(f"show_msg needs a string but got {type(msg)}")
+
         cls.lcd.clear()
         cls.lcd.message = msg
-
 
 #
 # class MyClient(object):
