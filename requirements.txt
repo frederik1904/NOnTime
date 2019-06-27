@@ -1,1 +1,2 @@
 python-interface
+adafruit-circuitpython-charlcd
