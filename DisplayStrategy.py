@@ -20,8 +20,10 @@ class ConsoleDisplay(DisplayInterface):
 
 
 class LCDDisplay(DisplayInterface):
-    
 
+    @classmethod
+    def show_msg(cls, msg):
+        pass
 #
 # class MyClient(object):
 #     def __init__(self, server):
