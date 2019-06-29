@@ -1,8 +1,8 @@
 from abc import ABCMeta
 
-import adafruit_character_lcd.character_lcd as characterlcd
-import board
-import digitalio
+#import adafruit_character_lcd.character_lcd as characterlcd
+#import board
+#import digitalio
 
 
 class DisplayInterface:
@@ -22,44 +22,25 @@ class ConsoleDisplay(DisplayInterface):
         print(msg)
 
 
-class LCDDisplay(DisplayInterface):
-    lcd_rs = digitalio.DigitalInOut(board.D26)
-    lcd_en = digitalio.DigitalInOut(board.D19)
-    lcd_d7 = digitalio.DigitalInOut(board.D27)
-    lcd_d6 = digitalio.DigitalInOut(board.D22)
-    lcd_d5 = digitalio.DigitalInOut(board.D24)
-    lcd_d4 = digitalio.DigitalInOut(board.D25)
-
-    lcd_columns = 16
-    lcd_rows = 2
-
-    lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows)
-    lcd.cursor = False
-
-    @classmethod
-    def show_msg(cls, msg):
-        """ Clears the LCD screen and writes the msg string to it """
-        if not isinstance(msg, str):
-            raise Exception(f"show_msg needs a string but got {type(msg)}")
-
-        cls.lcd.clear()
-        cls.lcd.message = msg
-
+#class LCDDisplay(DisplayInterface):
+#    lcd_rs = digitalio.DigitalInOut(board.D26)
+#    lcd_en = digitalio.DigitalInOut(board.D19)
+#    lcd_d7 = digitalio.DigitalInOut(board.D27)
+#    lcd_d6 = digitalio.DigitalInOut(board.D22)
+#    lcd_d5 = digitalio.DigitalInOut(board.D24)
+#    lcd_d4 = digitalio.DigitalInOut(board.D25)
 #
-# class MyClient(object):
-#     def __init__(self, server):
-#         if not isinstance(server, DisplayInterface):
-#             raise Exception("Bad interface")
+#    lcd_columns = 16
+#    lcd_rows = 2
 #
-#         if not DisplayInterface.version() == "1.0":
-#             raise Exception("Bad version")
+#    lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows)
+#    lcd.cursor = False
 #
-#         self.__server = server
+#    @classmethod
+#    def show_msg(cls, msg):
+#        """ Clears the LCD screen and writes the msg string to it """
+#        if not isinstance(msg, str):
+#            raise Exception(f"show_msg needs a string but got {type(msg)}")
 #
-#     def client_show(cls):
-#         cls.__server.show()
-#
-#
-# x = MyClient(MyServer())
-#
-# x.client_show()
+#        cls.lcd.clear()
+#        cls.lcd.message = msg
