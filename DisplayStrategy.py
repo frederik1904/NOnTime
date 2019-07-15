@@ -24,10 +24,10 @@ class ConsoleDisplay(DisplayInterface):
 
 
 class LCDDisplay(DisplayInterface):
-    lcd_rs = digitalio.DigitalInOut(board.D25)
+    lcd_rs = digitalio.DigitalInOut(board.D26)
     lcd_en = digitalio.DigitalInOut(board.D24)
-    lcd_d7 = digitalio.DigitalInOut(board.D23)
-    lcd_d6 = digitalio.DigitalInOut(board.D17)
+    lcd_d7 = digitalio.DigitalInOut(board.D12)
+    lcd_d6 = digitalio.DigitalInOut(board.D16)
     lcd_d5 = digitalio.DigitalInOut(board.D18)
     lcd_d4 = digitalio.DigitalInOut(board.D22)
 
