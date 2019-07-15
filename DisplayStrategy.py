@@ -37,21 +37,21 @@ class LCDDisplay(DisplayInterface):
     LCD_CHARS = 16  # Characters per line (16 max)
     LCD_LINE_1 = 0x80  # LCD memory location for 1st line
     LCD_LINE_2 = 0xC0  # LCD memory location 2nd line
+    def ___init___(self):
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
+        GPIO.setup(self.LCD_E, GPIO.OUT)  # Set GPIO's to output mode
+        GPIO.setup(self.LCD_RS, GPIO.OUT)
+        GPIO.setup(self.LCD_D4, GPIO.OUT)
+        GPIO.setup(self.LCD_D5, GPIO.OUT)
+        GPIO.setup(self.LCD_D6, GPIO.OUT)
+        GPIO.setup(self.LCD_D7, GPIO.OUT)
+
+        # Initialize display
+        cls.lcd_init(self)
 
     @classmethod
     def show_msg(cls, msg):
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
-        GPIO.setup(cls.LCD_E, GPIO.OUT)  # Set GPIO's to output mode
-        GPIO.setup(cls.LCD_RS, GPIO.OUT)
-        GPIO.setup(cls.LCD_D4, GPIO.OUT)
-        GPIO.setup(cls.LCD_D5, GPIO.OUT)
-        GPIO.setup(cls.LCD_D6, GPIO.OUT)
-        GPIO.setup(cls.LCD_D7, GPIO.OUT)
-
-        # Initialize display
-        cls.lcd_init(cls)
-
         # Loop - send text and sleep 3 seconds between texts
         # Change text to anything you wish, but must be 16 characters or less
         cls.lcd_text(cls, msg, cls.LCD_LINE_1)
