@@ -59,12 +59,12 @@ class LCDDisplay(DisplayInterface):
 
     # Initialize and clear display
     def lcd_init(self):
-        lcd_write(0x33, self.LCD_CMD)  # Initialize
-        lcd_write(0x32, self.LCD_CMD)  # Set to 4-bit mode
-        lcd_write(0x06, self.LCD_CMD)  # Cursor move direction
-        lcd_write(0x0C, self.LCD_CMD)  # Turn cursor off
-        lcd_write(0x28, self.LCD_CMD)  # 2 line display
-        lcd_write(0x01, self.LCD_CMD)  # Clear display
+        self.lcd_write(0x33, self.LCD_CMD)  # Initialize
+        self.lcd_write(0x32, self.LCD_CMD)  # Set to 4-bit mode
+        self.lcd_write(0x06, self.LCD_CMD)  # Cursor move direction
+        self.lcd_write(0x0C, self.LCD_CMD)  # Turn cursor off
+        self.lcd_write(0x28, self.LCD_CMD)  # 2 line display
+        self.lcd_write(0x01, self.LCD_CMD)  # Clear display
         time.sleep(0.0005)  # Delay to allow commands to process
 
     def lcd_write(self, bits, mode):
@@ -115,7 +115,7 @@ class LCDDisplay(DisplayInterface):
         # Send text to display
         message = message.ljust(self.LCD_CHARS, " ")
 
-        lcd_write(line, LCD_CMD)
+        self.lcd_write(line, LCD_CMD)
 
         for i in range(LCD_CHARS):
-            lcd_write(ord(message[i]), self.LCD_CHR)
+            self.lcd_write(ord(message[i]), self.LCD_CHR)
