@@ -86,7 +86,7 @@ class LCDDisplay(DisplayInterface):
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        self.lcd_toggle_enable(self)
+        self.lcd_toggle_enable()
 
         # Low bits
         GPIO.output(self.LCD_D4, False)
@@ -116,7 +116,7 @@ class LCDDisplay(DisplayInterface):
         # Send text to display
         message = message.ljust(self.LCD_CHARS, " ")
 
-        self.lcd_write(self, line, self.LCD_CMD)
+        self.lcd_write(line, self.LCD_CMD)
 
         for i in range(self.LCD_CHARS):
-            self.lcd_write(self, ord(message[i]), self.LCD_CHR)
+            self.lcd_write(ord(message[i]), self.LCD_CHR)
