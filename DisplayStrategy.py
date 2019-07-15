@@ -117,5 +117,5 @@ class LCDDisplay(DisplayInterface):
 
         self.lcd_write(self, line, self.LCD_CMD)
 
-        for i in range(LCD_CHARS):
+        for i in range(self.LCD_CHARS):
             self.lcd_write(self, ord(message[i]), self.LCD_CHR)
