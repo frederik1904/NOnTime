@@ -112,7 +112,7 @@ class LCDDisplay(DisplayInterface):
         # Send text to display
         message = message.ljust(cls.LCD_CHARS," ")
 
-        cls.lcd_write(line, cls.LCD_CMD)
+        cls.lcd_write(cls, line, cls.LCD_CMD)
 
         for i in range(cls.LCD_CHARS):
-            cls.lcd_write(ord(message[i]), cls.LCD_CHR)
+            cls.lcd_write(ord(cls, message[i]), cls.LCD_CHR)
