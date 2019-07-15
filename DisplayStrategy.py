@@ -51,7 +51,6 @@ class LCDDisplay(DisplayInterface):
 
     @classmethod
     def show_msg(cls, msg):
-        cls.lcd.clear()
         cls.lcd_text(cls, msg, cls.LCD_LINE_1)
         cls.lcd_text(cls, "", cls.LCD_LINE_2)
 
