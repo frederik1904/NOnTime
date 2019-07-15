@@ -24,12 +24,12 @@ class ConsoleDisplay(DisplayInterface):
 
 
 class LCDDisplay(DisplayInterface):
-    lcd_rs = digitalio.DigitalInOut(board.D26)
-    lcd_en = digitalio.DigitalInOut(board.D19)
-    lcd_d7 = digitalio.DigitalInOut(board.D27)
-    lcd_d6 = digitalio.DigitalInOut(board.D22)
-    lcd_d5 = digitalio.DigitalInOut(board.D24)
-    lcd_d4 = digitalio.DigitalInOut(board.D25)
+    lcd_rs = digitalio.DigitalInOut(board.D25)
+    lcd_en = digitalio.DigitalInOut(board.D24)
+    lcd_d7 = digitalio.DigitalInOut(board.D23)
+    lcd_d6 = digitalio.DigitalInOut(board.D17)
+    lcd_d5 = digitalio.DigitalInOut(board.D18)
+    lcd_d4 = digitalio.DigitalInOut(board.D22)
 
     lcd_columns = 16
     lcd_rows = 2
@@ -41,23 +41,3 @@ class LCDDisplay(DisplayInterface):
     def show_msg(cls, msg):
         cls.lcd.clear()
         cls.lcd.message = msg
-
-
-#
-# class MyClient(object):
-#     def __init__(self, server):
-#         if not isinstance(server, DisplayInterface):
-#             raise Exception("Bad interface")
-#
-#         if not DisplayInterface.version() == "1.0":
-#             raise Exception("Bad version")
-#
-#         self.__server = server
-#
-#     def client_show(cls):
-#         cls.__server.show()
-#
-#
-# x = MyClient(MyServer())
-#
-# x.client_show()
