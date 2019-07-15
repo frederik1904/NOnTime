@@ -86,7 +86,7 @@ class LCDDisplay(DisplayInterface):
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        lcd_toggle_enable(self)
+        self.lcd_toggle_enable()
 
         # Low bits
         GPIO.output(self.LCD_D4, False)
@@ -103,7 +103,7 @@ class LCDDisplay(DisplayInterface):
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        lcd_toggle_enable(self)
+        self.lcd_toggle_enable()
 
     def lcd_toggle_enable(self):
         time.sleep(0.0005)
