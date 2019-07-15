@@ -38,7 +38,7 @@ class LCDDisplay(DisplayInterface):
     LCD_LINE_1 = 0x80  # LCD memory location for 1st line
     LCD_LINE_2 = 0xC0  # LCD memory location 2nd line
 
-    def setup(self):
+    def t(self):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
         GPIO.setup(self.LCD_E, GPIO.OUT)  # Set GPIO's to output mode
@@ -49,7 +49,7 @@ class LCDDisplay(DisplayInterface):
         GPIO.setup(self.LCD_D7, GPIO.OUT)
 
         # Initialize display
-        self.lcd_init(self)
+        self.lcd_init()
 
     @classmethod
     def show_msg(cls, msg):
