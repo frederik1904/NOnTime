@@ -38,6 +38,15 @@ class LCDDisplay(DisplayInterface):
     LCD_LINE_2 = 0xC0 # LCD memory location 2nd line
 
     def ___init___(self):
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM) # Use BCM GPIO numbers
+        GPIO.setup(LCD_E, GPIO.OUT) # Set GPIO's to output mode
+        GPIO.setup(LCD_RS, GPIO.OUT)
+        GPIO.setup(LCD_D4, GPIO.OUT)
+        GPIO.setup(LCD_D5, GPIO.OUT)
+        GPIO.setup(LCD_D6, GPIO.OUT)
+        GPIO.setup(LCD_D7, GPIO.OUT)
+
         # Initialize display
         self.lcd_init()
 

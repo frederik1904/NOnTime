@@ -4,5 +4,5 @@ import time
 x = ds.LCDDisplay()
 
 for i in range(100):
-    x.show_msg("hello: " + i)
+    x.show_msg("hello: {i}")
     time.sleep(1)
