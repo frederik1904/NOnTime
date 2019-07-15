@@ -48,7 +48,7 @@ class LCDDisplay(DisplayInterface):
         GPIO.setup(self.LCD_D7, GPIO.OUT)
 
         # Initialize display
-        cls.lcd_init(self)
+        self.lcd_init(self)
 
     @classmethod
     def show_msg(cls, msg):
