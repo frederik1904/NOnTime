@@ -56,12 +56,12 @@ class LCDDisplay(DisplayInterface):
 
     # Initialize and clear display
     def lcd_init(cls):
-        cls.lcd_write(0x33, cls.LCD_CMD) # Initialize
-        cls.lcd_write(0x32, cls.LCD_CMD) # Set to 4-bit mode
-        cls.lcd_write(0x06, cls.LCD_CMD) # Cursor move direction
-        cls.lcd_write(0x0C, cls.LCD_CMD) # Turn cursor off
-        cls.lcd_write(0x28, cls.LCD_CMD) # 2 line display
-        cls.lcd_write(0x01, cls.LCD_CMD) # Clear display
+        cls.lcd_write(cls, 0x33, cls.LCD_CMD) # Initialize
+        cls.lcd_write(cls, 0x32, cls.LCD_CMD) # Set to 4-bit mode
+        cls.lcd_write(cls, 0x06, cls.LCD_CMD) # Cursor move direction
+        cls.lcd_write(cls, 0x0C, cls.LCD_CMD) # Turn cursor off
+        cls.lcd_write(cls, 0x28, cls.LCD_CMD) # 2 line display
+        cls.lcd_write(cls, 0x01, cls.LCD_CMD) # Clear display
         time.sleep(0.0005) # Delay to allow commands to process
 
     def lcd_write(cls, bits, mode):
