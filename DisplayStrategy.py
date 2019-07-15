@@ -37,7 +37,8 @@ class LCDDisplay(DisplayInterface):
     LCD_CHARS = 16  # Characters per line (16 max)
     LCD_LINE_1 = 0x80  # LCD memory location for 1st line
     LCD_LINE_2 = 0xC0  # LCD memory location 2nd line
-    def ___init___(self):
+
+    def setup(self):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
         GPIO.setup(self.LCD_E, GPIO.OUT)  # Set GPIO's to output mode
@@ -59,12 +60,12 @@ class LCDDisplay(DisplayInterface):
 
     # Initialize and clear display
     def lcd_init(self):
-        self.lcd_write(self,0x33, self.LCD_CMD)  # Initialize
-        self.lcd_write(self,0x32, self.LCD_CMD)  # Set to 4-bit mode
-        self.lcd_write(self,0x06, self.LCD_CMD)  # Cursor move direction
-        self.lcd_write(self,0x0C, self.LCD_CMD)  # Turn cursor off
-        self.lcd_write(self,0x28, self.LCD_CMD)  # 2 line display
-        self.lcd_write(self,0x01, self.LCD_CMD)  # Clear display
+        self.lcd_write(self, 0x33, self.LCD_CMD)  # Initialize
+        self.lcd_write(self, 0x32, self.LCD_CMD)  # Set to 4-bit mode
+        self.lcd_write(self, 0x06, self.LCD_CMD)  # Cursor move direction
+        self.lcd_write(self, 0x0C, self.LCD_CMD)  # Turn cursor off
+        self.lcd_write(self, 0x28, self.LCD_CMD)  # 2 line display
+        self.lcd_write(self, 0x01, self.LCD_CMD)  # Clear display
         time.sleep(0.0005)  # Delay to allow commands to process
 
     def lcd_write(self, bits, mode):
