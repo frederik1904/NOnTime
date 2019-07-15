@@ -54,8 +54,8 @@ class LCDDisplay(DisplayInterface):
 
         # Loop - send text and sleep 3 seconds between texts
         # Change text to anything you wish, but must be 16 characters or less
-        cls.lcd_text(msg, cls.LCD_LINE_1)
-        cls.lcd_text(msg, cls.LCD_LINE_2)
+        cls.lcd_text(cls, msg, cls.LCD_LINE_1)
+        cls.lcd_text(cls, msg, cls.LCD_LINE_2)
 
     # Initialize and clear display
     def lcd_init(self):
@@ -85,7 +85,7 @@ class LCDDisplay(DisplayInterface):
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        self.lcd_toggle_enable()
+        self.lcd_toggle_enable(self)
 
         # Low bits
         GPIO.output(self.LCD_D4, False)
@@ -102,7 +102,7 @@ class LCDDisplay(DisplayInterface):
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        self.lcd_toggle_enable()
+        self.lcd_toggle_enable(self)
 
     def lcd_toggle_enable(self):
         time.sleep(0.0005)
