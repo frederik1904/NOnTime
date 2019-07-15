@@ -42,80 +42,80 @@ class LCDDisplay(DisplayInterface):
     def show_msg(cls, msg):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
-        GPIO.setup(LCD_E, GPIO.OUT)  # Set GPIO's to output mode
-        GPIO.setup(LCD_RS, GPIO.OUT)
-        GPIO.setup(LCD_D4, GPIO.OUT)
-        GPIO.setup(LCD_D5, GPIO.OUT)
-        GPIO.setup(LCD_D6, GPIO.OUT)
-        GPIO.setup(LCD_D7, GPIO.OUT)
+        GPIO.setup(cls.LCD_E, GPIO.OUT)  # Set GPIO's to output mode
+        GPIO.setup(cls.LCD_RS, GPIO.OUT)
+        GPIO.setup(cls.LCD_D4, GPIO.OUT)
+        GPIO.setup(cls.LCD_D5, GPIO.OUT)
+        GPIO.setup(cls.LCD_D6, GPIO.OUT)
+        GPIO.setup(cls.LCD_D7, GPIO.OUT)
 
         # Initialize display
-        lcd_init()
+        cls.lcd_init(cls)
 
         # Loop - send text and sleep 3 seconds between texts
         # Change text to anything you wish, but must be 16 characters or less
-        self.lcd_text(msg, self.LCD_LINE_1)
-        self.lcd_text(msg, self.LCD_LINE_2)
+        cls.lcd_text(msg, cls.LCD_LINE_1)
+        cls.lcd_text(msg, cls.LCD_LINE_2)
 
     # Initialize and clear display
     def lcd_init(self):
-        lcd_write(0x33, LCD_CMD)  # Initialize
-        lcd_write(0x32, LCD_CMD)  # Set to 4-bit mode
-        lcd_write(0x06, LCD_CMD)  # Cursor move direction
-        lcd_write(0x0C, LCD_CMD)  # Turn cursor off
-        lcd_write(0x28, LCD_CMD)  # 2 line display
-        lcd_write(0x01, LCD_CMD)  # Clear display
+        lcd_write(0x33, self.LCD_CMD)  # Initialize
+        lcd_write(0x32, self.LCD_CMD)  # Set to 4-bit mode
+        lcd_write(0x06, self.LCD_CMD)  # Cursor move direction
+        lcd_write(0x0C, self.LCD_CMD)  # Turn cursor off
+        lcd_write(0x28, self.LCD_CMD)  # 2 line display
+        lcd_write(0x01, self.LCD_CMD)  # Clear display
         time.sleep(0.0005)  # Delay to allow commands to process
 
     def lcd_write(self, bits, mode):
         # High bits
-        GPIO.output(LCD_RS, mode)  # RS
+        GPIO.output(self.LCD_RS, mode)  # RS
 
-        GPIO.output(LCD_D4, False)
-        GPIO.output(LCD_D5, False)
-        GPIO.output(LCD_D6, False)
-        GPIO.output(LCD_D7, False)
+        GPIO.output(self.LCD_D4, False)
+        GPIO.output(self.LCD_D5, False)
+        GPIO.output(self.LCD_D6, False)
+        GPIO.output(self.LCD_D7, False)
         if bits & 0x10 == 0x10:
-            GPIO.output(LCD_D4, True)
+            GPIO.output(self.LCD_D4, True)
         if bits & 0x20 == 0x20:
-            GPIO.output(LCD_D5, True)
+            GPIO.output(self.LCD_D5, True)
         if bits & 0x40 == 0x40:
-            GPIO.output(LCD_D6, True)
+            GPIO.output(self.LCD_D6, True)
         if bits & 0x80 == 0x80:
-            GPIO.output(LCD_D7, True)
+            GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        lcd_toggle_enable()
+        self.lcd_toggle_enable()
 
         # Low bits
-        GPIO.output(LCD_D4, False)
-        GPIO.output(LCD_D5, False)
-        GPIO.output(LCD_D6, False)
-        GPIO.output(LCD_D7, False)
+        GPIO.output(self.LCD_D4, False)
+        GPIO.output(self.LCD_D5, False)
+        GPIO.output(self.LCD_D6, False)
+        GPIO.output(self.LCD_D7, False)
         if bits & 0x01 == 0x01:
-            GPIO.output(LCD_D4, True)
+            GPIO.output(self.LCD_D4, True)
         if bits & 0x02 == 0x02:
-            GPIO.output(LCD_D5, True)
+            GPIO.output(self.LCD_D5, True)
         if bits & 0x04 == 0x04:
-            GPIO.output(LCD_D6, True)
+            GPIO.output(self.LCD_D6, True)
         if bits & 0x08 == 0x08:
-            GPIO.output(LCD_D7, True)
+            GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        lcd_toggle_enable()
+        self.lcd_toggle_enable()
 
     def lcd_toggle_enable(self):
         time.sleep(0.0005)
-        GPIO.output(LCD_E, True)
+        GPIO.output(self.LCD_E, True)
         time.sleep(0.0005)
-        GPIO.output(LCD_E, False)
+        GPIO.output(self.LCD_E, False)
         time.sleep(0.0005)
 
     def lcd_text(self, message, line):
         # Send text to display
-        message = message.ljust(LCD_CHARS, " ")
+        message = message.ljust(self.LCD_CHARS, " ")
 
         lcd_write(line, LCD_CMD)
 
         for i in range(LCD_CHARS):
-            lcd_write(ord(message[i]), LCD_CHR)
+            lcd_write(ord(message[i]), self.LCD_CHR)
