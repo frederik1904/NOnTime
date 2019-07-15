@@ -115,13 +115,6 @@ class LCDDisplay(DisplayInterface):
         GPIO.output(self.LCD_E, False)
         time.sleep(0.0005)
 
-    def lcd_toggle_enable(self):
-        time.sleep(0.0005)
-        GPIO.output(self.LCD_E, True)
-        time.sleep(0.0005)
-        GPIO.output(self.LCD_E, False)
-        time.sleep(0.0005)
-
     def lcd_text(self, message, line):
         # Send text to display
         message = message.ljust(self.LCD_CHARS, " ")
