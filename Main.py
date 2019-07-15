@@ -6,4 +6,5 @@ x.t()
 
 for i in range(100):
     x.show_msg(f"hello: {i}")
+    print(f"hello: {i}")
     time.sleep(1)
