@@ -45,10 +45,10 @@ def cleanAndExit():
 x = ds.LCDDisplay()
 x.t()
 
-for i in range(100):
-    x.show_msg(f"hello: {i}")
-    print(f"hello: {i}")
-    time.sleep(1)
+# for i in range(100):
+#     x.show_msg(f"hello: {i}")
+#     print(f"hello: {i}")
+#     time.sleep(1)
 
 
 # to use both channels, you'll need to tare them both
