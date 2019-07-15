@@ -22,7 +22,6 @@ class ConsoleDisplay(DisplayInterface):
 
 
 class LCDDisplay(DisplayInterface):
-    # GPIO to LCD mapping
     LCD_RS = 7 # Pi pin 26
     LCD_E = 8 # Pi pin 24
     LCD_D4 = 25 # Pi pin 22
@@ -53,7 +52,8 @@ class LCDDisplay(DisplayInterface):
     @classmethod
     def show_msg(cls, msg):
         cls.lcd.clear()
-        cls.lcd_text(msg, cls.LCD_LINE_1)
+        cls.lcd_text(cls, msg, cls.LCD_LINE_1)
+        cls.lcd_text(cls, "", cls.LCD_LINE_2)
 
     # Initialize and clear display
     def lcd_init(cls):
