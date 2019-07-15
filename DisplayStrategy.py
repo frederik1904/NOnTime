@@ -1,9 +1,7 @@
 from abc import ABCMeta
 
-import adafruit_character_lcd.character_lcd as characterlcd
-import board
-import digitalio
-
+import RPi.GPIO as GPIO
+import time
 
 class DisplayInterface:
     ___metaclass___ = ABCMeta
@@ -24,20 +22,25 @@ class ConsoleDisplay(DisplayInterface):
 
 
 class LCDDisplay(DisplayInterface):
-    lcd_rs = digitalio.DigitalInOut(board.D26)
-    lcd_en = digitalio.DigitalInOut(board.D24)
-    lcd_d7 = digitalio.DigitalInOut(board.D12)
-    lcd_d6 = digitalio.DigitalInOut(board.D16)
-    lcd_d5 = digitalio.DigitalInOut(board.D18)
-    lcd_d4 = digitalio.DigitalInOut(board.D22)
+    # GPIO to LCD mapping
+    LCD_RS = 7 # Pi pin 26
+    LCD_E = 8 # Pi pin 24
+    LCD_D4 = 25 # Pi pin 22
+    LCD_D5 = 24 # Pi pin 18
+    LCD_D6 = 23 # Pi pin 16
+    LCD_D7 = 18 # Pi pin 12
 
-    lcd_columns = 16
-    lcd_rows = 2
+    # Device constants
+    LCD_CHR = True # Character mode
+    LCD_CMD = False # Command mode
+    LCD_CHARS = 16 # Characters per line (16 max)
+    LCD_LINE_1 = 0x80 # LCD memory location for 1st line
+    LCD_LINE_2 = 0xC0 # LCD memory location 2nd line
 
-    lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows)
-    lcd.cursor = False
+    # Initialize display
+    lcd_init()
 
     @classmethod
     def show_msg(cls, msg):
         cls.lcd.clear()
-        cls.lcd.message = msg
+        lcd_text(msg,LCD_LINE_
